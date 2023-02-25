@@ -4,15 +4,15 @@ import 'category_Meal_Screen.dart';
 import 'dummy_Data.dart';
 
 class CategoryItem extends StatelessWidget {
- 
-  final catItemDetials;
-  
-  const CategoryItem({this.catItemDetials});
+
+  final id;
+  final title;
+  final color;
+
+  const CategoryItem({this.id, this.title,this.color});
   void loadCategoryMEalPage(BuildContext ctx)
   {
-    Navigator.of(ctx).push(MaterialPageRoute(builder:(_) {
-          return Category_Meal_Screen(catItemDetials);     
-    }, ),);
+    Navigator.of(ctx).pushNamed("/cat-meal-Screen",arguments: {"id" :id, "title" :title,"color" :color});
   }
   @override
   Widget build(BuildContext context) {
@@ -21,11 +21,11 @@ class CategoryItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
 
       child: Container(
-        child: Text(catItemDetials.title),
+        child: Text(title),
     
         padding: const  EdgeInsets.all(15),
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [catItemDetials.color.withOpacity(0.7),catItemDetials.color],
+          gradient: LinearGradient(colors: [color.withOpacity(0.7),color],
           
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
