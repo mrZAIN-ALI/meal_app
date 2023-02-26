@@ -15,13 +15,9 @@ class Category_Meal_Screen extends StatelessWidget {
       appBar: AppBar(
         title: Text(routeArgs_CatDetails["title"]!),
       ),
-      body: Center(
-        child:  
-        Container(child: Text("Hello"),
-          // color: Theme.of(context).colorScheme.primary,  
-          color:(routeArgs_CatDetails["color"] as Color),
-        ),
-      ),
+      body: ListView.builder(itemBuilder: (context, index) {
+        
+      },) ,
     );
   }
 }

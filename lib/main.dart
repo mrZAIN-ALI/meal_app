@@ -26,7 +26,7 @@ class mealApp extends StatelessWidget {
         // colorScheme: Colors.black, //accentColor
         // canvasColor: Colors.red,
 
-        colorScheme:ColorScheme(
+        colorScheme:const ColorScheme(
             primary: Colors.red,
             
             secondary: Colors.black,
@@ -42,7 +42,7 @@ class mealApp extends StatelessWidget {
             brightness: Brightness.light,
         ),
         fontFamily: 'Raleway',
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           displayLarge: TextStyle(
             fontSize: 20,
             color: Colors.white,
@@ -60,10 +60,11 @@ class mealApp extends StatelessWidget {
           )
         ),
       ),
-      home: CategoriesScreen(),
+      // home: CategoriesScreen(),
 
       routes: {
-        "/cat-meal-Screen":(ctx) => Category_Meal_Screen() 
+        "/": (_) => CategoriesScreen(),
+        "/cat-meal-Screen":(_) => Category_Meal_Screen() 
       },
     );
   }
