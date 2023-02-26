@@ -12,7 +12,7 @@ class CategoryItem extends StatelessWidget {
   const CategoryItem({this.id, this.title,this.color});
   void loadCategoryMEalPage(BuildContext ctx)
   {
-    Navigator.of(ctx).pushNamed("/cat-meal-Screen",arguments: {"id" :id, "title" :title,"color" :color});
+    Navigator.of(ctx).pushNamed("/cat-meal-Screen",arguments: {"id" :id, "title" : title});
   }
   @override
   Widget build(BuildContext context) {
