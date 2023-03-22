@@ -52,6 +52,11 @@ class mealApp extends StatelessWidget {
             color:Colors.white,
             fontFamily: 'RobotoCondensed',
           ),
+           bodySmall: TextStyle(
+            // fontSize: 20,
+            color:Colors.black,
+            fontFamily: 'RobotoCondensed',
+          ),
           titleLarge: TextStyle(
             fontSize: 20,
             fontFamily: 'RobotoCondensed',      

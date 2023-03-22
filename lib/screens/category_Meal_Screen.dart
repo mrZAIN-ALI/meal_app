@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../widgets/mealitems.dart';
 import '../dummy_Data.dart';
 class Category_Meal_Screen extends StatelessWidget {
   // const Category_Meal_Screen({super.key});
@@ -23,8 +25,11 @@ class Category_Meal_Screen extends StatelessWidget {
       ),
 
       body: ListView.builder(itemBuilder: (ctx, index) {
-        return Text(categoryMEal[index].title,
-        style: TextStyle(backgroundColor: (Colors.black)),
+        return MealItem(title: categoryMEal[index].title,
+         imageUrl:categoryMEal[index].imageUrl ,
+         duration: categoryMEal[index].duration,
+         complexity: categoryMEal[index].complexity, 
+         affordability: categoryMEal[index].affordability
         );
       },itemCount: categoryMEal.length,) ,
     );
