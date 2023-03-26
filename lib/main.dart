@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import './screens/categories_Screen.dart';
+import 'package:meal_app/screens/filrersScreen.dart';
 
+import '../screens/tabBarScree.dart';
+import './screens/categories_Screen.dart';
 import './screens/category_Meal_Screen.dart';
+import './screens/mealDetails_Screen.dart';
+// import '../screens/FiltersScreen.dart';
 
 void main() {
   runApp( mealApp());
@@ -49,8 +53,8 @@ class mealApp extends StatelessWidget {
           ),
            bodyMedium: TextStyle(
             fontSize: 20,
-            color:Colors.white,
-            fontFamily: 'RobotoCondensed',
+            color:Colors.black,
+            fontFamily: 'Raleway-Bold',
           ),
            bodySmall: TextStyle(
             // fontSize: 20,
@@ -60,14 +64,21 @@ class mealApp extends StatelessWidget {
           titleLarge: TextStyle(
             fontSize: 20,
             fontFamily: 'RobotoCondensed',      
+            color: Colors.black,
           )
         ),
       ),
       // home: CategoriesScreen(),
 
       routes: {
-        "/": (_) => CategoriesScreen(),
-        "/cat-meal-Screen":(_) => Category_Meal_Screen() 
+        "/": (_) => TabBarScreen(),
+        "/cat-meal-Screen":(_) => Category_Meal_Screen() ,
+        MealDetailsScreen.routeName:(_) =>MealDetailsScreen(),
+        FiltersScreen.routeName:(_)=>FiltersScreen(),  
+      },
+
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (context) => Category_Meal_Screen(),);
       },
     );
   }

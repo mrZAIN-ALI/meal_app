@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../models/meal.dart';
+import '../screens/mealDetails_Screen.dart';
 
 class MealItem extends StatelessWidget {
-  void loadMeal() {}
-
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -11,7 +12,8 @@ class MealItem extends StatelessWidget {
   final Affordability affordability;
 
   MealItem(
-      {required this.title,
+      {required this.id,
+      required this.title,
       required this.imageUrl,
       required this.duration,
       required this.complexity,
@@ -55,12 +57,16 @@ class MealItem extends StatelessWidget {
     }
   }
 
+  void loadMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(MealDetailsScreen.routeName,arguments: id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context),
       child: InkWell(
-        onTap: loadMeal,
+        onTap: (){loadMeal(context);},
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
