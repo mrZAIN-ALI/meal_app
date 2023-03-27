@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+
 import '../models/meal.dart';
+import '../screens/mealDetails_Screen.dart';
 
 class MealItem extends StatelessWidget {
-  void loadMeal() {
-    Navigator.of(context).pushNamed(routeName);
-  }
-
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function deleteMeal;
 
   MealItem(
-      {required this.title,
+      {required this.id,
+      required this.title,
       required this.imageUrl,
       required this.duration,
       required this.complexity,
-      required this.affordability});
+      required this.affordability,
+      required this.deleteMeal}
+  );
 
   String get complexityText {
     // return complexity.toString();
@@ -30,7 +33,7 @@ class MealItem extends StatelessWidget {
       case Complexity.Medium:
         return "Medium";
         break;
-      case Complexity.Hard:W
+      case Complexity.Hard:
         return "Hard";
         break;
       default:
@@ -57,22 +60,24 @@ class MealItem extends StatelessWidget {
     }
   }
 
-<<<<<<< HEAD
-=======
   void loadMeal(BuildContext context) {
     Navigator.of(context).pushNamed(
       MealDetailsScreen.routeName,
       arguments: id
-    ).then((value) => print(value),);
+    ).then((value) {
+      if(value!=null)
+      {
+        deleteMeal();
+      }
+    },);
   }
 
->>>>>>> parent of 69bdd9d (Late initilization error)
   @override
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context),
       child: InkWell(
-        onTap: loadMeal,
+        onTap: (){loadMeal(context);},
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
