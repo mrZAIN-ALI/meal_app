@@ -30,7 +30,7 @@ class MealItem extends StatelessWidget {
       case Complexity.Medium:
         return "Medium";
         break;
-      case Complexity.Hard:
+      case Complexity.Hard:W
         return "Hard";
         break;
       default:
