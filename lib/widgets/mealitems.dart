@@ -57,6 +57,16 @@ class MealItem extends StatelessWidget {
     }
   }
 
+<<<<<<< HEAD
+=======
+  void loadMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      MealDetailsScreen.routeName,
+      arguments: id
+    ).then((value) => print(value),);
+  }
+
+>>>>>>> parent of 69bdd9d (Late initilization error)
   @override
   Widget build(BuildContext context) {
     return Theme(
