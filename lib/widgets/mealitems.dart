@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import '../models/meal.dart';
 
 class MealItem extends StatelessWidget {
-  void loadMeal() {}
+  void loadMeal() {
+    Navigator.of(context).pushNamed(routeName);
+  }
 
   final String title;
   final String imageUrl;
