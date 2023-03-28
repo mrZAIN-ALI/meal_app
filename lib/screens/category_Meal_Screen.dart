@@ -38,6 +38,7 @@ class _Category_Meal_ScreenState extends State<Category_Meal_Screen> {
           (m) {
             return m.categories.contains(categoryId);
           },
+          
         ).toList();      
         _loadedInitData=true;
       }
