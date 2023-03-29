@@ -69,7 +69,7 @@ class mealApp extends StatelessWidget {
         ),
       ),
       // home: CategoriesScreen(),
-
+      initialRoute: '/',
       routes: {
         "/": (_) => TabBarScreen(),
         "/cat-meal-Screen":(_) => Category_Meal_Screen() ,

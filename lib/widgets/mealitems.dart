@@ -67,7 +67,7 @@ class MealItem extends StatelessWidget {
     ).then((value) {
       if(value!=null)
       {
-        deleteMeal();
+        deleteMeal(value);
       }
     },);
   }
