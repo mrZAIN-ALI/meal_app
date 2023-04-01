@@ -129,7 +129,8 @@ class _mealAppState extends State<mealApp> {
       routes: {
         "/": (_) => TabBarScreen(_favoritedMeals),
         "/cat-meal-Screen": (_) => Category_Meal_Screen(_availableMeals),
-        MealDetailsScreen.routeName: (_) => MealDetailsScreen(_toggleFavorite,_isFavorite),
+        MealDetailsScreen.routeName: (_) =>
+            MealDetailsScreen(_toggleFavorite, _isFavorite),
         FiltersScreen.routeName: (_) => FiltersScreen(_setFilters),
       },
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meal_app/models/meal.dart';
 
 import '../widgets/mealitems.dart';
+
 class FavouritesScreen extends StatelessWidget {
   final List<Meal> _favoritedMeals;
 
@@ -13,17 +14,16 @@ class FavouritesScreen extends StatelessWidget {
       return const Center(
         child: Text("Favorites"),
       );
-    }
-    else{
+    } else {
       return ListView.builder(
         itemBuilder: (ctx, index) {
           return MealItem(
-              id: _favoritedMeals[index].id,
-              title: _favoritedMeals[index].title,
-              imageUrl: _favoritedMeals[index].imageUrl,
-              duration: _favoritedMeals[index].duration,
-              complexity: _favoritedMeals[index].complexity,
-              affordability: _favoritedMeals[index].affordability,            
+            id: _favoritedMeals[index].id,
+            title: _favoritedMeals[index].title,
+            imageUrl: _favoritedMeals[index].imageUrl,
+            duration: _favoritedMeals[index].duration,
+            complexity: _favoritedMeals[index].complexity,
+            affordability: _favoritedMeals[index].affordability,
           );
         },
         itemCount: _favoritedMeals.length,

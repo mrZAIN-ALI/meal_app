@@ -16,14 +16,13 @@ class Category_Meal_Screen extends StatefulWidget {
 }
 
 class _Category_Meal_ScreenState extends State<Category_Meal_Screen> {
-  
   String categoryTitle = " ";
   List<Meal> displayedMeal = [];
   bool _loadedInitData = false;
 
   @override
-  void didChangeDependencies(){
-    if(!_loadedInitData){
+  void didChangeDependencies() {
+    if (!_loadedInitData) {
       final routeArgs_CatDetails =
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       final categoryId = routeArgs_CatDetails["id"];
@@ -33,15 +32,17 @@ class _Category_Meal_ScreenState extends State<Category_Meal_Screen> {
         (Meal m) {
           return m.categories.contains(categoryId);
         },
-      ).toList();      
-      _loadedInitData=true;
+      ).toList();
+      _loadedInitData = true;
     }
     super.didChangeDependencies();
   }
 
   void _removeMeal(String mealId) {
     setState(() {
-      displayedMeal.removeWhere((meal) => meal.id==mealId,);
+      displayedMeal.removeWhere(
+        (meal) => meal.id == mealId,
+      );
     });
   }
 
@@ -54,18 +55,18 @@ class _Category_Meal_ScreenState extends State<Category_Meal_Screen> {
       body: displayedMeal.isEmpty
           ? Center(child: Text('No meals found'))
           : ListView.builder(
-        itemBuilder: (ctx, index) {
-          return MealItem(
-              id: displayedMeal[index].id,
-              title: displayedMeal[index].title,
-              imageUrl: displayedMeal[index].imageUrl,
-              duration: displayedMeal[index].duration,
-              complexity: displayedMeal[index].complexity,
-              affordability: displayedMeal[index].affordability,             
-          );
-        },
-        itemCount: displayedMeal.length,
-      ),
+              itemBuilder: (ctx, index) {
+                return MealItem(
+                  id: displayedMeal[index].id,
+                  title: displayedMeal[index].title,
+                  imageUrl: displayedMeal[index].imageUrl,
+                  duration: displayedMeal[index].duration,
+                  complexity: displayedMeal[index].complexity,
+                  affordability: displayedMeal[index].affordability,
+                );
+              },
+              itemCount: displayedMeal.length,
+            ),
     );
   }
 }

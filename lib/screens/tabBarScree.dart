@@ -16,36 +16,38 @@ class TabBarScreen extends StatefulWidget {
 }
 
 class _TabBarScreenState extends State<TabBarScreen> {
+  late List<Map<String, dynamic>> _ListOfWidgets;
 
-  late List<Map<String,dynamic>> _ListOfWidgets;
-  
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _ListOfWidgets=[
-    {"page" : CategoriesScreen(),
-      "title" : "Categories",
-    },
-
-    {"page" : FavouritesScreen(widget._favoritedMeals),
-      "title" : "Favourite",
-    }
-  ];
+    _ListOfWidgets = [
+      {
+        "page": CategoriesScreen(),
+        "title": "Categories",
+      },
+      {
+        "page": FavouritesScreen(widget._favoritedMeals),
+        "title": "Favourite",
+      }
+    ];
   }
 
-  int _selectedIndex=0;
-  void selectPage(int index){
+  int _selectedIndex = 0;
+  void selectPage(int index) {
     setState(() {
-      _selectedIndex=index;
-    });    
+      _selectedIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_ListOfWidgets[_selectedIndex]["title"] as String,),
+        title: Text(
+          _ListOfWidgets[_selectedIndex]["title"] as String,
+        ),
       ),
       drawer: MainDrawer(),
       body: _ListOfWidgets[_selectedIndex]["page"] as Widget,
@@ -54,20 +56,16 @@ class _TabBarScreenState extends State<TabBarScreen> {
         currentIndex: _selectedIndex,
         selectedItemColor: Theme.of(context).colorScheme.secondary,
         unselectedItemColor: Theme.of(context).colorScheme.onPrimary,
-
-        items: const  [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.category),
             label: "Category",
           ),
-          
           BottomNavigationBarItem(
             icon: Icon(Icons.star),
             label: "Favorites",
           ),
-
         ],
-
         onTap: selectPage,
       ),
     );

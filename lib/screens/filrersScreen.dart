@@ -34,18 +34,17 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Filters"),
-
           actions: [
             IconButton(
               onPressed: () {
-                 final selected_filter={
-    "gluten":_glutenFree,
-    "lactose":_lactoseFree,
-    "vegan":_vegan,
-    "vegetarain":_vagetarian
-  };
+                final selected_filter = {
+                  "gluten": _glutenFree,
+                  "lactose": _lactoseFree,
+                  "vegan": _vegan,
+                  "vegetarain": _vagetarian
+                };
                 widget._saveFilters(selected_filter);
-              }, 
+              },
               icon: Icon(Icons.save_outlined),
             )
           ],
@@ -89,7 +88,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     },
                   ),
                   Divider(),
-
                   _buildSwitchListTile(
                     "Vegetarian",
                     "Display Vegetarian Meals",
@@ -103,7 +101,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     },
                   ),
                   Divider(),
-
                   _buildSwitchListTile(
                     "Vegan",
                     "Display Vagen Meals",
