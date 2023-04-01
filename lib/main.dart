@@ -11,11 +11,10 @@ import './screens/mealDetails_Screen.dart';
 // import '../screens/FiltersScreen.dart';
 
 void main() {
-  runApp( mealApp());
+  runApp(mealApp());
 }
 
 class mealApp extends StatefulWidget {
-
   @override
   State<mealApp> createState() => _mealAppState();
 }
@@ -23,39 +22,62 @@ class mealApp extends StatefulWidget {
 class _mealAppState extends State<mealApp> {
   // This widget is the root of your application.
 
-  Map<String,bool> filters={
-    "gluten":false,
-    "lactose":false,
-    "vegan":false,
-    "vegetarain":false
+  Map<String, bool> filters = {
+    "gluten": false,
+    "lactose": false,
+    "vegan": false,
+    "vegetarain": false
   };
-  List<Meal> _availableMeals=DUMMY_MEALS;
-  List<Meal> _favoritedMeals=[];
-  void _setFilters(Map<String,bool> providedMap){
+  List<Meal> _availableMeals = DUMMY_MEALS;
+  void _setFilters(Map<String, bool> providedMap) {
     setState(() {
-      filters=providedMap;
+      filters = providedMap;
 
-      _availableMeals=DUMMY_MEALS.where((meal) {
-        if(filters["gluten"]! && !meal.isGlutenFree){
-          return false;
-        }
-         if(filters["lactose"] ! && !meal.isLactoseFree){
-          return false;
-        }
-         if(filters["vegetarain"] ! && !meal.isVeg){
-          return false;
-        }
-         if(filters["vegan"] ! && !meal.isVegan){
-          return false;
-        }
-        return true;
-      },).toList();
+      _availableMeals = DUMMY_MEALS.where(
+        (meal) {
+          if (filters["gluten"]! && !meal.isGlutenFree) {
+            return false;
+          }
+          if (filters["lactose"]! && !meal.isLactoseFree) {
+            return false;
+          }
+          if (filters["vegetarain"]! && !meal.isVeg) {
+            return false;
+          }
+          if (filters["vegan"]! && !meal.isVegan) {
+            return false;
+          }
+          return true;
+        },
+      ).toList();
     });
   }
+
+  List<Meal> _favoritedMeals = [];
+  void _toggleFavorite(String mealId) {
+    final existingIndex = _favoritedMeals.indexWhere(
+      (element) => element.id == mealId,
+    );
+
+    if (existingIndex >= 0) {
+      setState(() {
+        _favoritedMeals.removeAt(existingIndex);
+      });
+    } else {
+      setState(() {
+        _favoritedMeals.add(
+          DUMMY_MEALS.firstWhere((element) => element.id == mealId),
+        );
+      });
+    }
+  }
+
+  bool _isFavorite(String mealId) {
+    return _favoritedMeals.any((element) => element.id == mealId);
+  }
+
   @override
   Widget build(BuildContext context) {
-    
-    
     return MaterialApp(
       title: 'Flutter Demo',
 
@@ -66,59 +88,56 @@ class _mealAppState extends State<mealApp> {
         // colorScheme: Colors.black, //accentColor
         // canvasColor: Colors.red,
 
-        colorScheme:const ColorScheme(
-            primary: Colors.red,
-            
-            secondary: Colors.black,
-            
-            surface: Colors.white,
-            background: Colors.grey,
-            error: Colors.red,
-            onPrimary: Colors.white,
-            onSecondary: Colors.white,
-            onSurface: Colors.black,
-            onBackground: Colors.black,
-            onError: Colors.white,
-            brightness: Brightness.light,
+        colorScheme: const ColorScheme(
+          primary: Colors.red,
+          secondary: Colors.black,
+          surface: Colors.white,
+          background: Colors.grey,
+          error: Colors.red,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onBackground: Colors.black,
+          onError: Colors.white,
+          brightness: Brightness.light,
         ),
         fontFamily: 'Raleway',
         textTheme: const TextTheme(
-          displayLarge: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-            fontFamily: 'RobotoCondensed',
-            
-          ),
-           bodyMedium: TextStyle(
-            fontSize: 20,
-            color:Colors.black,
-            fontFamily: 'Raleway-Bold',
-          ),
-           bodySmall: TextStyle(
-            // fontSize: 20,
-            color:Colors.black,
-            fontFamily: 'RobotoCondensed',
-          ),
-          titleLarge: TextStyle(
-            fontSize: 30,
-            fontFamily: 'Raleway-Bold',      
-            color: Colors.black,
-          )
-        ),
+            displayLarge: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontFamily: 'RobotoCondensed',
+            ),
+            bodyMedium: TextStyle(
+              fontSize: 20,
+              color: Colors.black,
+              fontFamily: 'Raleway-Bold',
+            ),
+            bodySmall: TextStyle(
+              // fontSize: 20,
+              color: Colors.black,
+              fontFamily: 'RobotoCondensed',
+            ),
+            titleLarge: TextStyle(
+              fontSize: 30,
+              fontFamily: 'Raleway-Bold',
+              color: Colors.black,
+            )),
       ),
       // home: CategoriesScreen(),
       initialRoute: '/',
       routes: {
         "/": (_) => TabBarScreen(_favoritedMeals),
-        "/cat-meal-Screen":(_) => Category_Meal_Screen(_availableMeals) ,
-        MealDetailsScreen.routeName:(_) =>MealDetailsScreen(),
-        FiltersScreen.routeName:(_)=>FiltersScreen(_setFilters),  
+        "/cat-meal-Screen": (_) => Category_Meal_Screen(_availableMeals),
+        MealDetailsScreen.routeName: (_) => MealDetailsScreen(_toggleFavorite,_isFavorite),
+        FiltersScreen.routeName: (_) => FiltersScreen(_setFilters),
       },
 
       onUnknownRoute: (settings) {
-        return MaterialPageRoute(builder: (context) => Category_Meal_Screen(_availableMeals),);
+        return MaterialPageRoute(
+          builder: (context) => Category_Meal_Screen(_availableMeals),
+        );
       },
     );
   }
 }
-

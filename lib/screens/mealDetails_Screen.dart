@@ -2,41 +2,45 @@ import 'package:flutter/material.dart';
 import '../dummy_Data.dart';
 
 class MealDetailsScreen extends StatelessWidget {
-  const MealDetailsScreen({super.key});
+  final Function _toggleFavorite;
+  final Function _isFavorite;
+
+  MealDetailsScreen(this._toggleFavorite, this._isFavorite);
   static const routeName = "/meal-details";
 
-  Widget buildSectionTitle(BuildContext context,String text){
+  Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            child: Text(
-              "$text",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: Text(
+        "$text",
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
     );
   }
-  Widget buildContainer(Widget child)
-  {
+
+  Widget buildContainer(Widget child) {
     return Container(
       height: 250,
-            width: 300,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                color: Colors.black,
-              ),
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: const  [
-                BoxShadow (
-                  offset: Offset(0, 0),
-                  blurRadius: 2,
-                  spreadRadius: 2,
-                  color: Colors.black26,
-                ),
-              ],
-            ),
+      width: 300,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          color: Colors.black,
+        ),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            offset: Offset(0, 0),
+            blurRadius: 2,
+            spreadRadius: 2,
+            color: Colors.black26,
+          ),
+        ],
+      ),
       child: child,
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final mealId = ModalRoute.of(context)?.settings.arguments as String;
@@ -56,8 +60,8 @@ class MealDetailsScreen extends StatelessWidget {
               width: double.infinity,
               child: Image.network(dummySelectedMealData.imageUrl),
             ),
-           buildSectionTitle(context,"INGREDIENTS"),
-            buildContainer(           
+            buildSectionTitle(context, "INGREDIENTS"),
+            buildContainer(
               ListView.builder(
                 itemCount: dummySelectedMealData.ingredients.length,
                 itemBuilder: (context, index) => Card(
@@ -73,38 +77,37 @@ class MealDetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-           buildSectionTitle(context,"STEPS"),
-           buildContainer(
-            ListView.builder(itemBuilder: (context, index) => Column(
-              children: [
-                ListTile(
-                  leading: CircleAvatar(
-                    child: Text( "# ${index+1}" ,
-                      style: Theme.of(context).textTheme.bodyMedium,
+            buildSectionTitle(context, "STEPS"),
+            buildContainer(ListView.builder(
+              itemBuilder: (context, index) => Column(
+                children: [
+                  ListTile(
+                    leading: CircleAvatar(
+                      child: Text(
+                        "# ${index + 1}",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                     ),
-                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    title: Text(dummySelectedMealData.steps[index]),
                   ),
-                  title: Text(
-                    dummySelectedMealData.steps[index]
-                  ),
-                ),
-
-                Divider(),
-              ],
+                  Divider(),
+                ],
+              ),
+              itemCount: dummySelectedMealData.steps.length,
+            )),
+            SizedBox(
+              height: 10,
             ),
-            itemCount: dummySelectedMealData.steps.length,
-            )
-           ),
-           
-           SizedBox(height: 10,),
           ],
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete,),
+        child: Icon(
+          _isFavorite(mealId) ? Icons.favorite : Icons.favorite_border,
+        ),
         onPressed: () {
-          Navigator.of(context).pop(mealId);
+          _toggleFavorite(mealId);
         },
       ),
     );
